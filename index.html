@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Waste Monitoring System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>E-Waste Monitoring</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#collection">Request Collection</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#scanner">AI Scanner</a></li>
+            <li><a href="#login">Login</a></li>
+            <li><a href="#register">Register</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <h1>Welcome to E-Waste Monitoring System</h1>
+            <p>Properly dispose of your electronic waste and help protect our environment</p>
+            <button class="cta-button" onclick="showSection('collection')">Request Collection</button>
+        </div>
+        <div class="features">
+            <div class="feature-card">
+                <h3>Easy Collection</h3>
+                <p>Schedule a pickup for your e-waste and we'll collect it from your doorstep.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Eco-Friendly</h3>
+                <p>We ensure proper recycling and disposal of electronic waste to protect the environment.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Community Impact</h3>
+                <p>Join our community in making a positive impact on the environment.</p>
+            </div>
+        </div>
+
+        <!-- New Unique Features Section -->
+        <div class="unique-features">
+            <h2>Smart Monitoring Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>Live Collection Map</h3>
+                    <p>Track real-time e-waste collection routes and see collection points in your area.</p>
+                    <button class="feature-btn" onclick="showSection('map')">View Map</button>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h3>Impact Calculator</h3>
+                    <p>Calculate your environmental impact and see how much CO2 you've saved.</p>
+                    <button class="feature-btn" onclick="showSection('calculator')">Calculate Impact</button>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎮</div>
+                    <h3>Recycling Rewards</h3>
+                    <p>Earn points and badges for proper e-waste disposal. Compete with your community!</p>
+                    <button class="feature-btn" onclick="showSection('rewards')">View Rewards</button>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <h3>Smart Bin Monitoring</h3>
+                    <p>Get notified when collection bins are full and schedule immediate pickups.</p>
+                    <button class="feature-btn" onclick="showSection('smart-bins')">Monitor Bins</button>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎮</div>
+                    <h3>E-Waste Sorting Game</h3>
+                    <p>Test your knowledge with our interactive waste sorting game and earn rewards!</p>
+                    <button class="feature-btn" onclick="showSection('sorting-game')">Play Game</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Collection Map Section -->
+    <section id="map" class="section">
+        <h2>Live Collection Map</h2>
+        <div class="map-container">
+            <div id="map-display"></div>
+            <div class="map-controls">
+                <div class="map-legend">
+                    <h3>Collection Points</h3>
+                    <div class="legend-item">
+                        <span class="legend-color active"></span>
+                        <span>Active Collection</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color scheduled"></span>
+                        <span>Scheduled Pickup</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color completed"></span>
+                        <span>Completed</span>
+                    </div>
+                </div>
+                <div class="map-filters">
+                    <h3>Filter By</h3>
+                    <select id="wasteTypeFilter">
+                        <option value="all">All Types</option>
+                        <option value="computers">Computers</option>
+                        <option value="phones">Phones</option>
+                        <option value="appliances">Appliances</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Calculator Section -->
+    <section id="calculator" class="section">
+        <h2>Environmental Impact Calculator</h2>
+        <div class="calculator-container">
+            <div class="calculator-form">
+                <div class="form-group">
+                    <label>Select Device Type</label>
+                    <select id="deviceType">
+                        <option value="">Choose a device</option>
+                        <option value="laptop">Laptop</option>
+                        <option value="smartphone">Smartphone</option>
+                        <option value="tablet">Tablet</option>
+                        <option value="tv">Television</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Number of Devices</label>
+                    <input type="number" id="deviceCount" min="1" value="1">
+                </div>
+                <button id="calculateImpactBtn" class="submit-button">Calculate Impact</button>
+            </div>
+            <div class="calculator-results">
+                <div class="result-card">
+                    <h3>Environmental Impact</h3>
+                    <div id="impactResults"></div>
+                </div>
+                <div class="result-card">
+                    <h3>Resource Savings</h3>
+                    <div id="resourceResults"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rewards Section -->
+    <section id="rewards" class="section">
+        <h2>Eco-Warrior Hub</h2>
+        <div class="rewards-container">
+            <!-- User Profile Card -->
+            <div class="user-profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User Avatar">
+                    </div>
+                    <div class="profile-info">
+                        <h3 class="username">Eco-Warrior</h3>
+                        <div class="level-badge">
+                            <span class="level-icon">🌱</span>
+                            <span class="level-text">Level 5</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">🔥</span>
+                        <span class="stat-value">7</span>
+                        <span class="stat-label">Day Streak</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-value">2,450</span>
+                        <span class="stat-label">XP</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🪙</span>
+                        <span class="stat-value">850</span>
+                        <span class="stat-label">Green Coins</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Challenges -->
+            <div class="daily-challenges">
+                <h3>Daily Challenges</h3>
+                <div class="challenges-grid">
+                    <div class="challenge-card">
+                        <div class="challenge-icon">📱</div>
+                        <h4>Recycle 3 Phones</h4>
+                        <div class="challenge-progress">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 66%"></div>
+                            </div>
+                            <span>2/3</span>
+                        </div>
+                        <div class="challenge-reward">
+                            <span>+50 XP</span>
+                            <span>+25 🪙</span>
+                        </div>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="challenge-icon">💻</div>
+                        <h4>Recycle 2 Laptops</h4>
+                        <div class="challenge-progress">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 50%"></div>
+                            </div>
+                            <span>1/2</span>
+                        </div>
+                        <div class="challenge-reward">
+                            <span>+100 XP</span>
+                            <span>+50 🪙</span>
+                        </div>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="challenge-icon">🌱</div>
+                        <h4>Share on Social</h4>
+                        <div class="challenge-progress">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 0%"></div>
+                            </div>
+                            <span>0/1</span>
+                        </div>
+                        <div class="challenge-reward">
+                            <span>+30 XP</span>
+                            <span>+15 🪙</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements -->
+            <div class="achievements-section">
+                <h3>Your Achievements</h3>
+                <div class="achievements-grid">
+                    <div class="achievement-card unlocked">
+                        <div class="achievement-icon">🌍</div>
+                        <h4>Eco Pioneer</h4>
+                        <p>Recycle 10 items</p>
+                        <div class="achievement-progress">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 80%"></div>
+                            </div>
+                            <span>8/10</span>
+                        </div>
+                    </div>
+                    <div class="achievement-card locked">
+                        <div class="achievement-icon">👑</div>
+                        <h4>Recycling King</h4>
+                        <p>Reach Level 10</p>
+                        <div class="achievement-progress">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 50%"></div>
+                            </div>
+                            <span>Level 5/10</span>
+                        </div>
+                    </div>
+                    <div class="achievement-card locked">
+                        <div class="achievement-icon">🔥</div>
+                        <h4>Streak Master</h4>
+                        <p>30 day streak</p>
+                        <div class="achievement-progress">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 23%"></div>
+                            </div>
+                            <span>7/30 days</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leaderboard -->
+            <div class="leaderboard-section">
+                <h3>Community Leaderboard</h3>
+                <div class="leaderboard-list">
+                    <div class="leaderboard-item">
+                        <span class="rank">1</span>
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" alt="User Avatar">
+                        <span class="user-name">John</span>
+                        <span class="user-xp">5,230 XP</span>
+                    </div>
+                    <div class="leaderboard-item">
+                        <span class="rank">2</span>
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" alt="User Avatar">
+                        <span class="user-name">Sarah</span>
+                        <span class="user-xp">4,890 XP</span>
+                    </div>
+                    <div class="leaderboard-item">
+                        <span class="rank">3</span>
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Mike" alt="User Avatar">
+                        <span class="user-name">Mike</span>
+                        <span class="user-xp">4,560 XP</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rewards Shop -->
+            <div class="rewards-shop">
+                <h3>Rewards Shop</h3>
+                <div class="shop-grid">
+                    <div class="shop-item">
+                        <div class="shop-item-icon">🌳</div>
+                        <h4>Plant a Tree</h4>
+                        <p>Contribute to reforestation</p>
+                        <div class="shop-item-price">500 🪙</div>
+                        <button class="shop-item-btn">Redeem</button>
+                    </div>
+                    <div class="shop-item">
+                        <div class="shop-item-icon">🎁</div>
+                        <h4>Eco Shopping Voucher</h4>
+                        <p>$10 off eco-friendly products</p>
+                        <div class="shop-item-price">1000 🪙</div>
+                        <button class="shop-item-btn">Redeem</button>
+                    </div>
+                    <div class="shop-item">
+                        <div class="shop-item-icon">♻️</div>
+                        <h4>Recycling Kit</h4>
+                        <p>Home recycling starter kit</p>
+                        <div class="shop-item-price">2000 🪙</div>
+                        <button class="shop-item-btn">Redeem</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart Bins Section -->
+    <section id="smart-bins" class="section">
+        <h2>Smart Bin Monitoring</h2>
+        <div class="bins-container">
+            <div class="bins-grid">
+                <div class="bin-card">
+                    <div class="bin-status full">
+                        <span class="status-indicator"></span>
+                        <h3>Bin #1234</h3>
+                    </div>
+                    <div class="bin-details">
+                        <p>Location: Downtown Area</p>
+                        <p>Capacity: 95%</p>
+                        <p>Last Emptied: 2 hours ago</p>
+                    </div>
+                    <button class="bin-action-btn">Schedule Pickup</button>
+                </div>
+                <div class="bin-card">
+                    <div class="bin-status moderate">
+                        <span class="status-indicator"></span>
+                        <h3>Bin #1235</h3>
+                    </div>
+                    <div class="bin-details">
+                        <p>Location: Shopping Mall</p>
+                        <p>Capacity: 65%</p>
+                        <p>Last Emptied: 5 hours ago</p>
+                    </div>
+                    <button class="bin-action-btn">Schedule Pickup</button>
+                </div>
+                <div class="bin-card">
+                    <div class="bin-status low">
+                        <span class="status-indicator"></span>
+                        <h3>Bin #1236</h3>
+                    </div>
+                    <div class="bin-details">
+                        <p>Location: Park Area</p>
+                        <p>Capacity: 30%</p>
+                        <p>Last Emptied: 8 hours ago</p>
+                    </div>
+                    <button class="bin-action-btn">Schedule Pickup</button>
+                </div>
+            </div>
+            <div class="bin-analytics">
+                <h3>Bin Analytics</h3>
+                <div class="analytics-chart">
+                    <!-- Chart will be added via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- E-Waste Sorting Game Section -->
+    <section id="sorting-game" class="section">
+        <h2>E-Waste Sorting Challenge</h2>
+        <div class="game-container">
+            <div class="game-header">
+                <div class="game-stats">
+                    <div class="stat-box">
+                        <span class="stat-icon">⏱️</span>
+                        <span id="timeLeft">60</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-icon">⭐</span>
+                        <span id="currentScore">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-icon">🎯</span>
+                        <span id="level">1</span>
+                    </div>
+                </div>
+                <div class="game-controls">
+                    <button id="startGame" class="game-btn">Start Game</button>
+                    <button id="pauseGame" class="game-btn" disabled>Pause</button>
+                    <button id="restartGame" class="game-btn">Restart</button>
+                </div>
+            </div>
+            <div class="game-area">
+                <div class="waste-items-container" id="wasteItems">
+                    <!-- Waste items will be dynamically added here -->
+                </div>
+                <div class="recycling-bins">
+                    <div class="bin" data-type="e-waste">
+                        <div class="bin-icon">💻</div>
+                        <div class="bin-label">E-Waste</div>
+                    </div>
+                    <div class="bin" data-type="battery">
+                        <div class="bin-icon">🔋</div>
+                        <div class="bin-label">Batteries</div>
+                    </div>
+                    <div class="bin" data-type="plastic">
+                        <div class="bin-icon">♻️</div>
+                        <div class="bin-label">Plastic</div>
+                    </div>
+                    <div class="bin" data-type="metal">
+                        <div class="bin-icon">⚙️</div>
+                        <div class="bin-label">Metal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="game-info">
+                <div class="level-info">
+                    <h3>Level <span id="currentLevel">1</span></h3>
+                    <div class="progress-bar">
+                        <div class="progress" id="levelProgress"></div>
+                    </div>
+                    <p>Sort items correctly to level up!</p>
+                </div>
+                <div class="achievement-info">
+                    <h3>Current Streak</h3>
+                    <div class="streak-counter">
+                        <span id="currentStreak">0</span>
+                        <span class="streak-icon">🔥</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Waste Scanner Section -->
+    <section id="scanner" class="section">
+        <h2>AI Waste Scanner</h2>
+        <div class="scanner-container">
+            <div class="scanner-interface">
+                <div class="scanner-preview">
+                    <div class="camera-placeholder" id="cameraPreview">
+                        <div class="camera-icon">📸</div>
+                        <p>Position your waste item in the frame</p>
+                    </div>
+                    <video id="cameraFeed" autoplay playsinline style="display: none;"></video>
+                </div>
+                <div class="scanner-controls">
+                    <button id="startCamera" class="scanner-btn">
+                        <span class="btn-icon">🎥</span>
+                        Start Camera
+                    </button>
+                    <button id="captureImage" class="scanner-btn" disabled>
+                        <span class="btn-icon">📸</span>
+                        Capture Image
+                    </button>
+                    <button id="uploadImage" class="scanner-btn">
+                        <span class="btn-icon">📁</span>
+                        Upload Image
+                    </button>
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                </div>
+            </div>
+            <div class="scanner-results">
+                <div class="result-card">
+                    <h3>Scan Results</h3>
+                    <div id="scanResults" class="scan-results">
+                        <div class="scan-placeholder">
+                            <p>Scan results will appear here</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <h3>Recycling Guide</h3>
+                    <div id="recyclingGuide" class="recycling-guide">
+                        <div class="guide-placeholder">
+                            <p>Recycling instructions will appear here</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <h3>Environmental Impact</h3>
+                    <div id="environmentalImpact" class="environmental-impact">
+                        <div class="impact-placeholder">
+                            <p>Environmental impact details will appear here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection Request Section -->
+    <section id="collection" class="section">
+        <h2>Request E-Waste Collection</h2>
+        <form id="collectionForm" class="form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="wasteType">Type of E-Waste</label>
+                <select id="wasteType" required>
+                    <option value="">Select Type</option>
+                    <option value="computers">Computers & Laptops</option>
+                    <option value="phones">Mobile Phones</option>
+                    <option value="appliances">Home Appliances</option>
+                    <option value="batteries">Batteries</option>
+                    <option value="other">Other Electronics</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Preferred Collection Date</label>
+                <input type="date" id="date" required>
+            </div>
+            <div class="form-group">
+                <label for="notes">Additional Notes</label>
+                <textarea id="notes"></textarea>
+            </div>
+            <button type="submit" class="submit-button">Submit Request</button>
+        </form>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <h2>E-Waste Management Education</h2>
+        <div class="education-content">
+            <div class="info-cards">
+                <div class="info-card">
+                    <h3>Global Impact</h3>
+                    <p>Over 50 million tons of e-waste are generated annually worldwide, with only 20% being properly recycled. This growing problem affects every country and requires immediate attention.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Environmental Hazard</h3>
+                    <p>E-waste contains toxic materials like lead, mercury, and cadmium that can harm the environment and human health. Improper disposal leads to soil and water contamination.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Resource Recovery</h3>
+                    <p>Proper recycling can recover valuable materials like gold, silver, and copper from electronic devices. This reduces the need for mining and helps conserve natural resources.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Health Risks</h3>
+                    <p>Exposure to e-waste toxins can cause serious health issues including respiratory problems, neurological damage, and cancer. Children are particularly vulnerable to these risks.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Economic Benefits</h3>
+                    <p>E-waste recycling creates jobs and generates revenue. The global e-waste recycling market is projected to reach $50 billion by 2025, creating numerous employment opportunities.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Climate Impact</h3>
+                    <p>Proper e-waste recycling reduces greenhouse gas emissions by minimizing the need for raw material extraction and processing, helping combat climate change.</p>
+                </div>
+            </div>
+            <div class="faq-section">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        What is E-Waste?
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        E-waste, or electronic waste, refers to discarded electrical or electronic devices. This includes computers, 
+                        mobile phones, televisions, and other electronic appliances that have reached the end of their useful life.
+                        Common examples include smartphones, laptops, tablets, printers, and household appliances.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Why is E-Waste Management Important?
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Proper e-waste management is crucial because electronic devices contain hazardous materials that can harm 
+                        the environment and human health if not disposed of correctly. Additionally, recycling e-waste helps recover 
+                        valuable materials and reduces the need for mining new resources. It also helps prevent illegal dumping and 
+                        reduces the carbon footprint of electronic manufacturing.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        What are the Environmental Impacts of Improper E-Waste Disposal?
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Improper e-waste disposal leads to severe environmental consequences including:
+                        <ul>
+                            <li>Soil contamination from toxic chemicals</li>
+                            <li>Water pollution affecting aquatic life</li>
+                            <li>Air pollution from burning e-waste</li>
+                            <li>Damage to ecosystems and biodiversity</li>
+                            <li>Contribution to climate change</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        What are the Benefits of E-Waste Recycling?
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        E-waste recycling offers numerous benefits:
+                        <ul>
+                            <li>Recovery of valuable materials (gold, silver, copper, etc.)</li>
+                            <li>Reduction in environmental pollution</li>
+                            <li>Conservation of natural resources</li>
+                            <li>Creation of employment opportunities</li>
+                            <li>Reduction in greenhouse gas emissions</li>
+                            <li>Prevention of health hazards</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        How Can I Properly Dispose of E-Waste?
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        You can properly dispose of e-waste by:
+                        <ul>
+                            <li>Using certified e-waste recycling facilities</li>
+                            <li>Participating in e-waste collection programs</li>
+                            <li>Donating working electronics to organizations in need</li>
+                            <li>Returning devices to manufacturers for recycling</li>
+                            <li>Using our collection service for proper disposal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section id="login" class="section">
+        <h2>Login</h2>
+        <form id="loginForm" class="form">
+            <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" required>
+            </div>
+            <button type="submit" class="submit-button">Login</button>
+            <p class="form-link">Don't have an account? <a href="#" onclick="showSection('register')">Register here</a></p>
+        </form>
+    </section>
+
+    <!-- Register Section -->
+    <section id="register" class="section">
+        <h2>Register</h2>
+        <form id="registerForm" class="form">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="registerPhone">Phone Number</label>
+                <input type="tel" id="registerPhone" required>
+            </div>
+            <div class="form-group">
+                <label for="registerPassword">Password</label>
+                <input type="password" id="registerPassword" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" required>
+            </div>
+            <button type="submit" class="submit-button">Register</button>
+            <p class="form-link">Already have an account? <a href="#" onclick="showSection('login')">Login here</a></p>
+        </form>
+    </section>
+    
+    
+    <script type="module" src="script.js"></script>
+    <script type="module" src="game.js"></script>
+</body>
+</html> 
